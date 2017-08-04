@@ -52,11 +52,7 @@ public class MainActivity extends AppCompatActivity {
         displayDatabaseInfo();
     }
 
-    /**
-     * Temporary helper method to READ information in the onscreen TextView about the state of
-     * the users database.
-     */
-    private void displayDatabaseInfo() {
+    public Cursor queryAllHabits() {
         // To access our database, we instantiate our subclass of SQLiteOpenHelper
         // and pass the context, which is the current activity.
         HabitTrackerDBHelper mDbHelper = new HabitTrackerDBHelper(this);
@@ -83,7 +79,18 @@ public class MainActivity extends AppCompatActivity {
                 null,
                 null,
                 null);
+        
+        return cursor;
+    }
+    
+        /**
+         * Temporary helper method to READ information in the onscreen TextView about the state of
+         * the users database.
+         */
+    private void displayDatabaseInfo() {
 
+        Cursor cursor = queryAllHabits();
+        
         TextView displayView = (TextView) findViewById(R.id.text_view_user);
 
         displayView.setText(""); //set view as blank first, then append data to prevent repeats of data.
